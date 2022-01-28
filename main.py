@@ -1,6 +1,11 @@
 import random
 from ListaEncad import ListaEncad
 from No import No
+from Largura import executarLargura
+from Profundidade import executarProfundidade
+from Ordenada import executarOrdenada
+from Gulosa import executarGulosa
+from AEstrela import executarAEstrela
 
 barras = []
 
@@ -10,7 +15,7 @@ def interface():
 
     print("1 - Busca em Largura")
     print("2 - Busca em Profundidade")
-    print("3 - Busca Ordanada")
+    print("3 - Busca Ordenada")
     print("4 - Busca Gulosa")
     print("5 - Busca A*")
     print("0 - Sair")
@@ -26,14 +31,19 @@ def main():
         # Busca em Largura
         if entrada == "1":
             print("Implementação da busca em largura")
+            executarLargura(barras)
         elif entrada == "2":
             print("Implementação da busca em profundidade")
+            executarProfundidade(barras)
         elif entrada == "3":
             print("Implementação da busca ordenada")
+            executarOrdenada(barras)
         elif entrada == "4":
             print("Implementação da busca gulosa")
+            executarGulosa(barras)
         elif entrada == "5":
             print("Implementação da busca A*")
+            executarAEstrela(barras)
         elif entrada == "0":
             break
         else:
