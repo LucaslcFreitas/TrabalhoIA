@@ -1,5 +1,6 @@
 
-class No(object):
+class NoLista(object):
+    __nome = None
     __proximo = None
     __troca = None
     __final = False
@@ -7,13 +8,17 @@ class No(object):
     __custoReal = 0
     __heuristica = 0
 
-    def __init__(self, proximo=None, troca=None, final=False):
+    def __init__(self, nome, proximo=None, troca=None, final=False):
+        self.__nome = nome
         self.__proximo = proximo
         self.__troca = troca
         self.__final = final
 
         self.__custoReal = 0
         self.__heuristica = 0
+
+    def setNome(self, nome):
+        self.__nome = nome
 
     def setProximo(self, proximo):
         self.__proximo = proximo
@@ -29,6 +34,9 @@ class No(object):
 
     def setHeuristica(self, heuristica):
         self.__heuristica = heuristica
+
+    def getNome(self):
+        return self.__nome
 
     def getProximo(self):
         return self.__proximo

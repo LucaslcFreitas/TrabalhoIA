@@ -1,6 +1,6 @@
 import random
 from ListaEncad import ListaEncad
-from No import No
+from NoLista import NoLista
 from Largura import executarLargura
 from Profundidade import executarProfundidade
 from Ordenada import executarOrdenada
@@ -57,7 +57,7 @@ def preencheListaEncad():
     for i in range(7):
         aux = ListaEncad()
         for j in range(qtBarrasNos[i]):
-            aux.adicionaFinal(No())
+            aux.adicionaFinal(NoLista("B"+str(i+1)+"-"+str(j+1)))
         barras.append(aux)
 
     # Adiciona as transições horizontais

@@ -1,5 +1,5 @@
 from numpy import integer
-from No import No
+from NoLista import NoLista
 
 
 class ListaEncad(object):
@@ -10,13 +10,13 @@ class ListaEncad(object):
         self.__inicio = None
         self.__tamanho = 0
 
-    def getInicio(self) -> No:
+    def getInicio(self) -> NoLista:
         return self.__inicio
 
     def getTamanho(self) -> integer:
         return self.__tamanho
 
-    def adicionaFinal(self, no: No):
+    def adicionaFinal(self, no: NoLista):
         if self.__inicio == None:
             self.__inicio = no
         else:
@@ -28,7 +28,7 @@ class ListaEncad(object):
             noAnterior.setProximo(no)
         self.__tamanho = self.__tamanho + 1
 
-    def getIndice(self, indice: int) -> No:
+    def getIndice(self, indice: int) -> NoLista:
         cont = 0
         noAtual = self.__inicio
 
