@@ -10,7 +10,7 @@ class NoArvore(object):
     __opAnterior = None
     __custoAcumulado = None  # Utilizado na busca A*
 
-    def __init__(self, noLista, pai, opAterior, custoAcumulado=None) -> None:
+    def __init__(self, noLista, pai, opAterior, custoAcumulado=0) -> None:
         self.__pai = pai
         self.__noLista = noLista
         self.__filhos = []

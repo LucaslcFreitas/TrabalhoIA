@@ -1,5 +1,6 @@
 from Arvore import Arvore
 from NoArvore import NoArvore
+import random
 
 
 def executarGulosa(barras):
@@ -30,10 +31,14 @@ def executarGulosa(barras):
                 __imprimeCaminhoSolução(N, abertos, fechados)
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R3
-                    for i in range(7):
-                        novoNoArv = NoArvore(barras[i].getInicio(), N, False)
-                        N.addFilho(novoNoArv)
-                        abertos.append(novoNoArv)
+                    auxiliarRNG = []
+                    while len(auxiliarRNG) < 7:
+                        rng = random.randint(0, 6)
+                        if rng not in auxiliarRNG:
+                            novoNoArv = NoArvore(barras[rng].getInicio(), N, False)
+                            N.addFilho(novoNoArv)
+                            abertos.append(novoNoArv)
+                            auxiliarRNG.append(rng)
                 else:  # Usar regras R1 e R2
                     if not N.getOpAnterior():  # Regra R1
                         if N.getNoLista().getProximo() != None:
