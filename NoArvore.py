@@ -34,3 +34,6 @@ class NoArvore(object):
 
     def getCustoAcumulado(self) -> int:
         return self.__custoAcumulado
+
+    def getSomaCustoAcumuladoHeuristica(self) -> int:
+        return self.__custoAcumulado + self.__noLista.getHeuristica()
