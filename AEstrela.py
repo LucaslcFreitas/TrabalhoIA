@@ -1,12 +1,12 @@
+from io import BufferedRandom
 from Arvore import Arvore
 from NoArvore import NoArvore
-import random
 
 
 def executarAEstrela(barras):
     abertos = []
     fechados = []
-
+    f = open("./resultados/AEstrela.txt", "w")
     # cria árvore vazia, somente com a raiz
     # e adiciona a raiz na lista de abertos
     arvore = Arvore()
@@ -29,22 +29,18 @@ def executarAEstrela(barras):
 
             # Caso o No atual seja o que tem a banana
             if noAtual.getNoLista().getFinal():
-                __imprimeCaminhoSolução(noAtual, abertos, fechados)
+                __imprimeCaminhoSolução(f, noAtual, abertos, fechados)
                 break
             else:
                 if noAtual.getNoLista().getNome() == "M":  # Regra R3
-                    auxiliarRNG = []
-                    while len(auxiliarRNG) < 7:
-                        rng = random.randint(0, 6)
-                        if rng not in auxiliarRNG:
 
-                            novoNoArv = NoArvore(
-                                barras[rng].getInicio(), noAtual, False, barras[rng].getInicio(
-                                ).getCustoReal())
+                    for i in range(0, 7):
+                        novoNoArv = NoArvore(barras[i].getInicio(), noAtual,
+                                             False, barras[i].getInicio().getCustoReal())
 
-                            noAtual.addFilho(novoNoArv)
-                            abertos.append(novoNoArv)
-                            auxiliarRNG.append(rng)
+                        noAtual.addFilho(novoNoArv)
+                        abertos.append(novoNoArv)
+
                 else:  # Usar regras R1 e R2
                     if not noAtual.getOpAnterior():  # Regra R1
                         proximoNo = noAtual.getNoLista().getProximo()
@@ -68,58 +64,52 @@ def executarAEstrela(barras):
                 fechados.append(noAtual)
 
                 # Iterações
-                print("Iteracao: ", iteracao)
-                printArray("Fechados", fechados)
-                printArray("Abertos", abertos)
-                abertos = __reordenaListaAbertos(abertos)
-                printArray("Ordenado", abertos)
-                print("-------------------------")
+                abertos = __printIteracaoEOrdenaLista(iteracao,
+                                                      f, abertos, fechados)
         else:
             print("Não foi possível encontrar a solução!")
             break
+    f.close()
 
 
 def __reordenaListaAbertos(abertos):
     return sorted(abertos, key=lambda noArv: noArv.getSomaCustoAcumuladoHeuristica())
 
 
-def __imprimeCaminhoSolução(no, listaAbertos, listaFechados):
+def __imprimeCaminhoSolução(f: BufferedRandom, no, listaAbertos, listaFechados):
     print("Caminho encontrado!")
+    f.write("Caminho encontrado!\n")
+
     caminho = []
-    somaCustoReal = 0
-    somaCustoHeuristica = 0
     while no != None:
-        somaCustoReal = somaCustoReal + no.getNoLista().getCustoReal()
-        somaCustoHeuristica = somaCustoHeuristica + no.getNoLista().getHeuristica()
         caminho.append(no.getNoLista().getNome())
         no = no.getPai()
 
     caminho = caminho[::-1]
-    print("Caminho solução: ", caminho)
-    print("Custo Real: ", somaCustoReal)
-    print("Custo Heuristica: ", somaCustoHeuristica)
+    print(f"Solucao: {caminho}")
+    f.write(f"Solucao: {caminho}\n")
 
-    abertos = []
-    for i in range(len(listaAbertos)):
-        nome = listaAbertos[i].getNoLista().getNome()
-        valor = listaAbertos[i].getSomaCustoAcumuladoHeuristica()
-        abertos.append(f"{nome}({valor})")
-
-    print("Lista de abertos: ", abertos)
-
-    fechados = []
-    for i in range(len(listaFechados)):
-        nome = listaFechados[i].getNoLista().getNome()
-        valor = listaFechados[i].getSomaCustoAcumuladoHeuristica()
-        fechados.append(f"{nome}({valor})")
-
-    print("Lista de fechados: ", fechados, "\n")
+    __printLista(f, "Abertos", listaAbertos)
+    __printLista(f, "Fechados", listaFechados)
 
 
-def printArray(texto, lista):
+def __printIteracaoEOrdenaLista(iteracao, file: BufferedRandom, abertos, fechados):
+    print(f"Iteracao: {iteracao}")
+    file.write(f"Iteracao: {iteracao} \n")
+    __printLista(file, "Fechados", fechados)
+    __printLista(file, "Abertos", abertos)
+    abertos = __reordenaListaAbertos(abertos)
+    __printLista(file, "Ordenado", abertos)
+    print("-------------------------")
+    file.write("-------------------------\n")
+    return abertos
+
+
+def __printLista(file: BufferedRandom, texto, lista):
     string = []
     for i in range(len(lista)):
         nome = lista[i].getNoLista().getNome()
         valor = lista[i].getSomaCustoAcumuladoHeuristica()
         string.append(f"{nome}({valor})")
     print(f"{texto}: {string}")
+    file.write(f"{texto}: {string} \n")

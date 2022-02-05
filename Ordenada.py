@@ -2,6 +2,7 @@ from Arvore import Arvore
 from NoArvore import NoArvore
 import random
 
+
 def executarOrdenada(barras):
     banana = False
     abismo = False
@@ -27,14 +28,11 @@ def executarOrdenada(barras):
                 __imprimeCaminhoSolução(N, abertos, fechados)
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R3
-                    auxiliarRNG = []
-                    while len(auxiliarRNG) < 7:
-                        rng = random.randint(0, 6)
-                        if rng not in auxiliarRNG:
-                            novoNoArv = NoArvore(barras[rng].getInicio(), N, False, barras[rng].getInicio().getCustoReal())
-                            N.addFilho(novoNoArv)
-                            abertos.append(novoNoArv)
-                            auxiliarRNG.append(rng)
+                    for i in range(0, 7):
+                        novoNoArv = NoArvore(barras[i].getInicio(), N, False,
+                                             barras[i].getInicio().getCustoReal())
+                        N.addFilho(novoNoArv)
+                        abertos.append(novoNoArv)
                 else:  # Usar regras R1 e R2 alternadamente
                     if not N.getOpAnterior():  # Regra R1
                         if N.getNoLista().getProximo() != None:
@@ -56,7 +54,6 @@ def executarOrdenada(barras):
 
     if abismo:
         print("Não foi possível encontrar a solução!")
-
 
 
 def __imprimeCaminhoSolução(no, listaAbertos, listaFechados):

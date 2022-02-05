@@ -2,6 +2,7 @@ from Arvore import Arvore
 from NoArvore import NoArvore
 import random
 
+
 def executarProfundidade(barras):
     banana = False
     abismo = False
@@ -13,32 +14,32 @@ def executarProfundidade(barras):
     # cria ávore vazia, com a raíz sendo o macaco
     arvore = Arvore()
     abertos.append(arvore.getRaiz())
+    cont = 0
 
     while not banana and not abismo:
         if len(abertos) > 0:
-            N = abertos [len (abertos)-1]
+            N = abertos[len(abertos)-1]
 
             if N.getNoLista().getFinal():
                 banana = True
                 __imprimeCaminhoSolução(N, abertos, fechados)
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R3
-                    auxiliarRNG = []
-                    rng = random.randint(0, 6)
-                    while rng in auxiliarRNG:
-                        rng = random.randint(0, 6)
-                    novoNoArv = NoArvore(barras[rng].getInicio(), N, False )
+                    auxiliar = []
+                    novoNoArv = NoArvore(barras[cont].getInicio(), N, False)
                     N.addFilho(novoNoArv)
-                    auxiliarRNG.append(rng)
-                    if len (auxiliarRNG ) == 7:
+                    auxiliar.append(cont)
+                    if len(auxiliar) == 7:
                         abertos.pop()
                     abertos.append(novoNoArv)
-                    
+                    cont = cont + 1
+
                 else:  # Usar regras R1 e R2 alternadamente
                     abertos.pop()
                     if not N.getOpAnterior():  # Regra R1
                         if N.getNoLista().getProximo() != None:
-                            novoNoArv = NoArvore ( N.getNoLista().getProximo(), N, True)
+                            novoNoArv = NoArvore(
+                                N.getNoLista().getProximo(), N, True)
                             N.addFilho(novoNoArv)
                             abertos.append(novoNoArv)
                     else:  # Regra R2
@@ -56,7 +57,6 @@ def executarProfundidade(barras):
         print("Não foi possível encontrar a solução!")
 
 
-
 def __imprimeCaminhoSolução(no, listaAbertos, listaFechados):
     print("Caminho encontrado!")
     caminho = []
@@ -68,7 +68,7 @@ def __imprimeCaminhoSolução(no, listaAbertos, listaFechados):
 
     abertos = []
     for i in range(len(listaAbertos)):
-        abertos.append(listaAbertos[i].getNoLista().getNome( ))
+        abertos.append(listaAbertos[i].getNoLista().getNome())
     print("Lista de abertos: ", abertos)
 
     fechados = []

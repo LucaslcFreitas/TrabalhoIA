@@ -1,4 +1,3 @@
-from numpy import integer
 from NoLista import NoLista
 
 
@@ -13,7 +12,7 @@ class ListaEncad(object):
     def getInicio(self) -> NoLista:
         return self.__inicio
 
-    def getTamanho(self) -> integer:
+    def getTamanho(self) -> int:
         return self.__tamanho
 
     def adicionaFinal(self, no: NoLista):
