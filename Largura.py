@@ -10,17 +10,19 @@ def executarLargura(barras):
     banana = False
     fracasso = False
 
-    # cria ávore vazia, com a raíz sendo o macaco
+    # Cria árvore vazia, com a raiz sendo o macaco
     arvore = Arvore()
     abertos.append(arvore.getRaiz())
 
+    iteracao = 0
     while not banana and not fracasso:
+        iteracao = iteracao + 1
         if len(abertos) > 0:
             N = abertos.pop(0)
 
             if N.getNoLista().getFinal():
                 banana = True
-                __imprimeCaminhoSolução(N, abertos, fechados)
+                __imprimeCaminhoSolução(N, iteracao, abertos, fechados)
 
             else:
                 if N.getNoLista().getNome() == "M":  # Faz o macaco escolher uma barra da esquerda para a direita
@@ -43,27 +45,42 @@ def executarLargura(barras):
                             N.addFilho(novoNoArv)
                             abertos.append(novoNoArv)
                 fechados.append(N)
+
+                # Iterações
+                __printIteracao(iteracao, abertos, fechados)
+
         else:
             fracasso = True
         if fracasso:
             print("Não foi possível encontrar a solução!")
 
 
-def __imprimeCaminhoSolução(no, listaAbertos, listaFechados):
+def __imprimeCaminhoSolução(no, iteracoes, listaAbertos, listaFechados):
     print("Caminho encontrado!")
+    print(f"Iteracoes: {iteracoes}")
+
     caminho = []
     while no != None:
         caminho.append(no.getNoLista().getNome())
         no = no.getPai()
     caminho = caminho[::-1]
-    print("Caminho solução: ", caminho)
+    print("Solucao: ", caminho)
 
-    abertos = []
-    for i in range(len(listaAbertos)):
-        abertos.append(listaAbertos[i].getNoLista().getNome())
-    print("Lista de abertos: ", abertos)
+    __printLista("Abertos", listaAbertos)
+    __printLista("Fechados", listaFechados)
 
-    fechados = []
-    for i in range(len(listaFechados)):
-        fechados.append(listaFechados[i].getNoLista().getNome())
-    print("Lista de fechados: ", fechados, "\n")
+
+def __printIteracao(iteracao, abertos, fechados):
+    print(f"Iteracao: {iteracao}")
+
+    __printLista("Fechados", fechados)
+    __printLista("Abertos", abertos)
+    print("-------------------------")
+
+
+def __printLista(texto, lista):
+    string = []
+    for i in range(len(lista)):
+        nome = lista[i].getNoLista().getNome()
+        string.append(f"{nome}")
+    print(f"{texto}: {string}")
