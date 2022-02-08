@@ -35,7 +35,8 @@ def executarGulosa(barras):
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R1
                     for i in range(0, 7):
-                        novoNoArv = NoArvore(barras[i].getInicio(), N, False)
+                        novoNoArv = NoArvore(barras[i].getInicio(
+                        ), N, False, barras[i].getInicio().getCustoReal())
                         N.addFilho(novoNoArv)
                         abertos.append(novoNoArv)
 
@@ -43,13 +44,13 @@ def executarGulosa(barras):
                     if not N.getOpAnterior():  # Regra R2
                         if N.getNoLista().getProximo() != None:
                             novoNoArv = NoArvore(N.getNoLista().getProximo(),
-                                                 N, True)
+                                                 N, True, N.getCustoAcumulado()+N.getNoLista().getProximo().getCustoReal())
                             N.addFilho(novoNoArv)
                             abertos.append(novoNoArv)
                     else:  # Regra R3
                         if N.getNoLista().getTroca() != None:
                             novoNoArv = NoArvore(N.getNoLista().getTroca(),
-                                                 N, False)
+                                                 N, False, N.getCustoAcumulado()+N.getNoLista().getTroca().getCustoReal())
                             N.addFilho(novoNoArv)
                             abertos.append(novoNoArv)
 
@@ -84,6 +85,7 @@ def __printIteracaoEOrdenaLista(iteracao, abertos, fechados):
 def __imprimeCaminhoSolucao(no, iteracoes, listaAbertos, listaFechados):
     print("Caminho encontrado!")
     print(f"Iteracoes: {iteracoes}")
+    print("Custo real: ", no.getCustoAcumulado())
 
     caminho = []
     while no != None:

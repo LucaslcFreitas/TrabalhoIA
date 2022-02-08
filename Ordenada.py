@@ -4,19 +4,19 @@ import random
 
 
 def executarOrdenada(barras):
-    banana = False
-    abismo = False
-
     # lista de abertos e fechados
     abertos = []
     fechados = []
+
+    banana = False
+    fracasso = False
 
     # cria árvore vazia, com a raiz sendo o macaco
     arvore = Arvore()
     abertos.append(arvore.getRaiz())
 
     iteracao = 0
-    while not banana and not abismo:
+    while not banana and not fracasso:
         iteracao = iteracao + 1
         if len(abertos) > 0:
             N = abertos.pop(0)
@@ -51,9 +51,9 @@ def executarOrdenada(barras):
                 abertos = __printIteracaoEOrdenaLista(iteracao,
                                                       abertos, fechados)
         else:
-            abismo = True
+            fracasso = True
 
-    if abismo:
+    if fracasso:
         print("Nao foi possivel encontrar a solucao!")
 
 # Função auxiliar para reordenar a fila na ordem de custo real
@@ -78,6 +78,7 @@ def __printIteracaoEOrdenaLista(iteracao, abertos, fechados):
 def __imprimeCaminhoSolução(no, iteracoes, listaAbertos, listaFechados):
     print("Caminho encontrado!")
     print(f"Iteracoes: {iteracoes}")
+    print("Custo real: ", no.getCustoAcumulado())
 
     caminho = []
     while no != None:

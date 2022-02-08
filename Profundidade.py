@@ -4,9 +4,9 @@ from NoArvore import NoArvore
 
 def executarProfundidade(barras):
     banana = False
-    abismo = False
+    fracasso = False
 
-    # Lista de abertos e fechados
+    # Pilha de abertos
     abertos = []
     fechados = []
 
@@ -16,7 +16,7 @@ def executarProfundidade(barras):
     cont = 0
 
     iteracao = 0
-    while not banana and not abismo:
+    while not banana and not fracasso:
         iteracao = iteracao + 1
         if len(abertos) > 0:
             N = abertos[len(abertos)-1]
@@ -55,9 +55,9 @@ def executarProfundidade(barras):
                     # Iterações
                     __printIteracao(iteracao, abertos, fechados)
         else:
-            abismo = True
+            fracasso = True
 
-    if abismo:
+    if fracasso:
         print("Nao foi possivel encontrar a solucao!")
 
 

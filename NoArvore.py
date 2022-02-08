@@ -8,7 +8,7 @@ class NoArvore(object):
     __filhos = None
     # Define se a operação anterior foi subir ou troca. True = subir, False troca
     __opAnterior = None
-    __custoAcumulado = None  # Utilizado na busca A*
+    __custoAcumulado = None
 
     def __init__(self, noLista, pai, opAterior, custoAcumulado=0) -> None:
         self.__pai = pai

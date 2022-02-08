@@ -77,6 +77,7 @@ def __reordenaListaAbertos(abertos):
 def __imprimeCaminhoSolucao(no, iteracoes, listaAbertos, listaFechados):
     print("Caminho encontrado!")
     print(f"Iteracoes: {iteracoes}")
+    print("Custo real: ", no.getCustoAcumulado())
 
     caminho = []
     while no != None:
