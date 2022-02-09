@@ -28,11 +28,9 @@ def executarProfundidade(barras):
                 imprimeArvore(arvore.getRaiz(), "Profundidade")
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R1
-                    auxiliar = []
                     novoNoArv = NoArvore(barras[cont].getInicio(), N, False)
                     N.addFilho(novoNoArv)
-                    auxiliar.append(cont)
-                    if len(auxiliar) == 7:
+                    if cont == 7:
                         abertos.pop()
                     abertos.append(novoNoArv)
                     cont = cont + 1
