@@ -1,6 +1,6 @@
 from Arvore import Arvore
 from NoArvore import NoArvore
-import random
+from ImprimeArvore import imprimeArvore
 
 
 def executarOrdenada(barras):
@@ -24,6 +24,7 @@ def executarOrdenada(barras):
             if N.getNoLista().getFinal():
                 banana = True
                 __imprimeCaminhoSolução(N, iteracao, abertos, fechados)
+                imprimeArvore(arvore.getRaiz(), "Ordenada")
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R1
                     for i in range(0, 7):

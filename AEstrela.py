@@ -1,6 +1,6 @@
 from Arvore import Arvore
 from NoArvore import NoArvore
-from CriarArvore import __criarArvore
+from ImprimeArvore import imprimeArvore
 
 
 def executarAEstrela(barras):
@@ -30,7 +30,7 @@ def executarAEstrela(barras):
             # Caso o No atual seja o que tem a banana
             if noAtual.getNoLista().getFinal():
                 __imprimeCaminhoSolucao(noAtual, iteracao, abertos, fechados)
-                __criarArvore(arvore.getRaiz(), "AEstrela")
+                imprimeArvore(arvore.getRaiz(), "AEstrela")
                 break
             else:
                 if noAtual.getNoLista().getNome() == "M":  # Regra R1

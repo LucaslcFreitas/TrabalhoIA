@@ -1,5 +1,6 @@
 from Arvore import Arvore
 from NoArvore import NoArvore
+from ImprimeArvore import imprimeArvore
 
 
 def executarProfundidade(barras):
@@ -24,6 +25,7 @@ def executarProfundidade(barras):
             if N.getNoLista().getFinal():
                 banana = True
                 __imprimeCaminhoSolução(N, iteracao, abertos, fechados)
+                imprimeArvore(arvore.getRaiz(), "Profundidade")
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R1
                     auxiliar = []

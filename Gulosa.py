@@ -1,5 +1,6 @@
 from Arvore import Arvore
 from NoArvore import NoArvore
+from ImprimeArvore import imprimeArvore
 
 
 def executarGulosa(barras):
@@ -32,6 +33,7 @@ def executarGulosa(barras):
             if N.getNoLista().getFinal():
                 sucesso = True
                 __imprimeCaminhoSolucao(N, iteracao, abertos, fechados)
+                imprimeArvore(arvore.getRaiz(), "Gulosa")
             else:
                 if N.getNoLista().getNome() == "M":  # Regra R1
                     for i in range(0, 7):

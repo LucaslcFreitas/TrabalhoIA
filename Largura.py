@@ -1,6 +1,6 @@
 from Arvore import Arvore
 from NoArvore import NoArvore
-import random
+from ImprimeArvore import imprimeArvore
 
 
 def executarLargura(barras):
@@ -23,7 +23,7 @@ def executarLargura(barras):
             if N.getNoLista().getFinal():
                 banana = True
                 __imprimeCaminhoSolução(N, iteracao, abertos, fechados)
-
+                imprimeArvore(arvore.getRaiz(), "Largura")
             else:
                 if N.getNoLista().getNome() == "M":  # Faz o macaco escolher uma barra da esquerda para a direita
                     for i in range(0, 7):
